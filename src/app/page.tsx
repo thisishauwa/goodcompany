@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useApp } from "@/lib/store/app-context";
 import { Navbar } from "@/components/navigation/Navbar";
@@ -11,12 +11,131 @@ import { BookCover } from "@/components/books/BookCover";
 import { RatingBadge, SpiceBadge } from "@/components/books/BookBadges";
 import { InteractiveBookshelf } from "@/components/books/InteractiveBookshelf";
 import { StarFlair } from "@/components/ui/Illustrations";
-import { Calendar, Book1, Clock, SecuritySafe, Star } from "iconsax-react";
+import {
+  Calendar,
+  Book1,
+  Clock,
+  SecuritySafe,
+  Star,
+  DocumentDownload,
+} from "iconsax-react";
 import { X } from "lucide-react";
+import { toPng } from "html-to-image";
+import { jsPDF } from "jspdf";
+import { getFontEmbedCSS } from "@/lib/utils/font-embed";
 
 export default function HomePage() {
-  const { currentBook, books } = useApp();
+  const { currentBook, books, addToast } = useApp();
   const [readingGuideOpen, setReadingGuideOpen] = useState(false);
+  const [isDownloadingGuide, setIsDownloadingGuide] = useState(false);
+  const guidePdfRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    getFontEmbedCSS();
+  }, []);
+
+  const handleDownloadGuidePdf = async () => {
+    if (!currentBook || !guidePdfRef.current || isDownloadingGuide) return;
+    setIsDownloadingGuide(true);
+
+    try {
+      const fontEmbedCSS = await getFontEmbedCSS();
+      await new Promise((r) => setTimeout(r, 150));
+
+      const el = guidePdfRef.current;
+      const dataUrl = await toPng(el, {
+        pixelRatio: 2,
+        cacheBust: true,
+        fontEmbedCSS: fontEmbedCSS || undefined,
+      });
+
+      const widthPx = el.offsetWidth || 794;
+      const heightPx = el.offsetHeight || 1123;
+      const pdfWidthMm = 210;
+      const pdfHeightMm = Math.max(
+        297,
+        Math.round((heightPx * pdfWidthMm) / widthPx),
+      );
+
+      const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: [pdfWidthMm, pdfHeightMm],
+        compress: true,
+      });
+
+      doc.addImage(
+        dataUrl,
+        "PNG",
+        0,
+        0,
+        pdfWidthMm,
+        pdfHeightMm,
+        undefined,
+        "FAST",
+      );
+
+      const safeTitle = currentBook.title
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-");
+      const filename = `good-company-reading-guide-${safeTitle}.pdf`;
+      const pdfDataUri = doc.output("datauristring");
+
+      let downloadedViaApi = false;
+      try {
+        const res = await fetch("/api/download", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            dataUrl: pdfDataUri,
+            filename,
+            contentType: "application/pdf",
+          }),
+        });
+
+        if (res.ok) {
+          const blob = await res.blob();
+          const blobUrl = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = blobUrl;
+          link.download = filename;
+          document.body.appendChild(link);
+          link.click();
+          setTimeout(() => {
+            document.body.removeChild(link);
+            URL.revokeObjectURL(blobUrl);
+          }, 1000);
+          downloadedViaApi = true;
+        }
+      } catch {}
+
+      if (!downloadedViaApi) {
+        const pdfArrayBuffer = doc.output("arraybuffer");
+        const pdfBlob = new Blob([pdfArrayBuffer], { type: "application/pdf" });
+        const blobUrl = URL.createObjectURL(pdfBlob);
+        const link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(() => {
+          document.body.removeChild(link);
+          URL.revokeObjectURL(blobUrl);
+        }, 1000);
+      }
+
+      addToast("Reading Guide PDF downloaded!", "success");
+    } catch (err) {
+      console.error("Failed to download Reading Guide PDF:", err);
+      addToast(
+        "Could not generate Reading Guide PDF. Please try again.",
+        "error",
+      );
+    } finally {
+      setIsDownloadingGuide(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F6EEE9] text-[#5B2302]">
@@ -325,28 +444,60 @@ export default function HomePage() {
             onClick={(e) => e.stopPropagation()}
             className="bg-[#FFFDF9] rounded-3xl p-6 sm:p-10 max-w-3xl w-full max-h-[90vh] overflow-y-auto no-scrollbar [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border-2 border-[#5B2302] relative animate-in zoom-in-95 duration-200 space-y-6 font-body"
           >
-            {/* Modal Header */}
-            <div className="flex items-start justify-between pb-2">
-              <div>
-                <span className="px-3 py-0.5 rounded-full bg-[#FFA5D5] text-[#5B2302] text-xs font-extrabold uppercase tracking-wide border border-[#5B2302]/20 inline-block mb-1">
-                  Curator’s Reading Guide
-                </span>
-                <h3 className="font-block text-2xl sm:text-3xl uppercase text-[#5B2302] leading-tight">
-                  {currentBook.title}
-                </h3>
-                <p className="font-script text-2xl text-[#5B2302]">
-                  by {currentBook.author}
-                </p>
+            {/* Modal Header with Book Cover & Download PDF CTA */}
+            <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#5B2302]/15">
+              <div className="flex items-center gap-4 sm:gap-5 min-w-0">
+                <div className="shrink-0">
+                  <BookCover
+                    book={currentBook}
+                    size="sm"
+                    className="w-20 h-30 sm:w-24 sm:h-36"
+                    showBookmark={false}
+                    showBadge={false}
+                  />
+                </div>
+                <div className="space-y-1 min-w-0">
+                  <span className="px-3 py-0.5 rounded-full bg-[#FFA5D5] text-[#5B2302] text-[10px] sm:text-xs font-extrabold uppercase tracking-wide border border-[#5B2302]/20 inline-block">
+                    Curator’s Reading Guide
+                  </span>
+                  <h3 className="font-block text-2xl sm:text-3xl uppercase text-[#5B2302] leading-tight">
+                    {currentBook.title}
+                  </h3>
+                  <p className="font-script text-2xl text-[#5B2302] leading-none">
+                    by {currentBook.author}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-2 pt-1">
+                    <RatingBadge rating={currentBook.rating} size="sm" />
+                    <SpiceBadge level={currentBook.spice_level} size="sm" />
+                  </div>
+                </div>
               </div>
 
-              <button
-                type="button"
-                onClick={() => setReadingGuideOpen(false)}
-                className="p-1.5 rounded-full border border-[#5B2302]/30 text-[#5B2302] hover:bg-[#5B2302] hover:text-[#F6EEE9] transition-colors"
-                title="Close"
-              >
-                <X className="w-5 h-5" strokeWidth={2.2} />
-              </button>
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={handleDownloadGuidePdf}
+                  disabled={isDownloadingGuide}
+                  className="clean-btn px-3.5 py-2 rounded-full bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-[10px] sm:text-xs font-extrabold uppercase tracking-wider inline-flex items-center gap-1.5 cursor-pointer disabled:opacity-60"
+                >
+                  <DocumentDownload size={15} color="#FFA5D5" variant="Bold" />
+                  <span className="hidden sm:inline">
+                    {isDownloadingGuide ? "Preparing PDF..." : "Download PDF"}
+                  </span>
+                  <span className="sm:hidden">
+                    {isDownloadingGuide ? "..." : "PDF"}
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setReadingGuideOpen(false)}
+                  className="p-1.5 rounded-full border border-[#5B2302]/30 text-[#5B2302] hover:bg-[#5B2302] hover:text-[#F6EEE9] transition-colors"
+                  title="Close"
+                >
+                  <X className="w-5 h-5" strokeWidth={2.2} />
+                </button>
+              </div>
             </div>
 
             {/* 0. COMPLETE SYNOPSIS / ABOUT THE BOOK */}
@@ -436,6 +587,207 @@ export default function HomePage() {
                 </p>
               </div>
             )}
+
+            {/* Bottom Download Button */}
+            <div className="pt-2 border-t border-[#5B2302]/15 flex items-center justify-between gap-3">
+              <span className="text-xs font-body font-bold text-[#5B2302] flex items-center gap-1.5">
+                <Calendar size={15} color="#5B2302" variant="Bold" />
+                Discussion:{" "}
+                {new Date(currentBook.discussion_date).toLocaleDateString(
+                  "en-GB",
+                  { day: "numeric", month: "short", year: "numeric" },
+                )}
+              </span>
+
+              <button
+                type="button"
+                onClick={handleDownloadGuidePdf}
+                disabled={isDownloadingGuide}
+                className="clean-btn px-5 py-2.5 rounded-full bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-xs font-extrabold uppercase tracking-wider inline-flex items-center gap-2 cursor-pointer disabled:opacity-60"
+              >
+                <DocumentDownload size={16} color="#FFA5D5" variant="Bold" />
+                {isDownloadingGuide
+                  ? "Generating PDF..."
+                  : "Download Reading Guide PDF"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* PRINTABLE A4 READING GUIDE PDF TEMPLATE (Captured at 2x by html-to-image) */}
+      {/* ========================================================================= */}
+      {currentBook && (
+        <div
+          aria-hidden="true"
+          className="fixed top-0 left-0 pointer-events-none opacity-0 -z-50 overflow-hidden font-body"
+          style={{ width: "794px" }}
+        >
+          <div
+            ref={guidePdfRef}
+            style={{
+              width: "794px",
+              minHeight: "1123px",
+              boxSizing: "border-box",
+            }}
+            className="relative bg-[#F6EEE9] text-[#5B2302] p-10 flex flex-col justify-between"
+          >
+            {/* Outer Editorial Frame */}
+            <div className="absolute inset-4 border-2 border-[#5B2302] pointer-events-none rounded-2xl" />
+
+            <div className="relative space-y-5">
+              {/* Top Masthead */}
+              <div className="flex items-center justify-between border-b-2 border-[#5B2302] pb-4">
+                <div className="flex items-center gap-3">
+                  <img
+                    src="/images/logo-web.png"
+                    alt="Good Company Book Club"
+                    className="h-12 w-auto object-contain"
+                  />
+                </div>
+                <div className="px-3.5 py-1 rounded-full bg-[#FFA5D5] border border-[#5B2302] font-block text-xs uppercase tracking-wider text-[#5B2302]">
+                  Curator’s Reading Guide
+                </div>
+              </div>
+
+              {/* Book Hero Row with Cover Image */}
+              <div className="bg-[#FFFCF7] border border-[#5B2302]/25 rounded-2xl p-5 flex items-center gap-6">
+                <div className="shrink-0">
+                  <BookCover
+                    book={currentBook}
+                    size="sm"
+                    className="w-28 h-42"
+                    showBookmark={false}
+                    showBadge={false}
+                  />
+                </div>
+                <div className="space-y-1.5 flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#5B2302]/70">
+                      {currentBook.genre}
+                    </span>
+                    <RatingBadge rating={currentBook.rating} size="sm" />
+                    <SpiceBadge level={currentBook.spice_level} size="sm" />
+                  </div>
+                  <h1 className="font-block text-3xl uppercase text-[#5B2302] leading-tight">
+                    {currentBook.title}
+                  </h1>
+                  <p className="font-script text-2xl text-[#5B2302] leading-tight">
+                    by {currentBook.author}
+                  </p>
+                  <div className="pt-1 flex items-center gap-4 text-xs font-bold text-[#5B2302]/85">
+                    <span>
+                      Discussion:{" "}
+                      {new Date(currentBook.discussion_date).toLocaleDateString(
+                        "en-GB",
+                        { day: "numeric", month: "short", year: "numeric" },
+                      )}
+                    </span>
+                    {currentBook.meeting_format && (
+                      <span>&bull; {currentBook.meeting_format}</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* About The Book */}
+              <div className="bg-[#FFFCF7] border border-[#5B2302]/25 rounded-2xl p-5 space-y-2">
+                <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wide text-[#5B2302]">
+                  <Book1 size={15} color="#5B2302" variant="Bold" />
+                  About The Book
+                </div>
+                <p className="text-xs text-[#5B2302]/90 leading-relaxed">
+                  {currentBook.description}
+                </p>
+              </div>
+
+              {/* Curator's Editorial Take */}
+              {currentBook.curator_note && (
+                <div className="bg-[#FFFCEB] border border-[#5B2302]/25 rounded-2xl p-4 space-y-1">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#5B2302] block">
+                    Curator’s Editorial Take
+                  </span>
+                  <p className="text-xs text-[#5B2302] leading-relaxed">
+                    {currentBook.curator_note}
+                  </p>
+                </div>
+              )}
+
+              {/* Weekly Pacing Guide */}
+              {currentBook.reading_guide && (
+                <div className="bg-[#FFFCF7] border border-[#5B2302]/25 rounded-2xl p-5 space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-extrabold uppercase text-[#5B2302]">
+                    <Clock size={15} color="#5B2302" variant="Bold" />
+                    Weekly Pacing Guide
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {currentBook.reading_guide
+                      .split("\n")
+                      .filter(Boolean)
+                      .map((line, idx) => {
+                        const title = `Week ${idx + 1}`;
+                        const content = line
+                          .replace(/^week\s*\d+\s*[:\-–—.]?\s*/i, "")
+                          .trim();
+                        return (
+                          <div
+                            key={idx}
+                            className="p-3 rounded-xl bg-[#F6EEE9]/60 border border-[#5B2302]/15"
+                          >
+                            <span className="font-bold text-xs uppercase text-[#5B2302] block mb-0.5">
+                              {title}
+                            </span>
+                            <p className="text-[11px] text-[#5B2302]/85 leading-relaxed">
+                              {content}
+                            </p>
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+              )}
+
+              {/* Themes & Content Notes + Scene-Skip Guide */}
+              <div className="grid grid-cols-1 gap-4">
+                {currentBook.has_content_notes && (
+                  <div className="bg-[#FFFCF7] border border-[#5B2302]/25 rounded-2xl p-4 space-y-1.5">
+                    <div className="flex items-center gap-2 text-xs font-extrabold uppercase text-[#5B2302]">
+                      <SecuritySafe size={15} color="#5B2302" variant="Bold" />
+                      Themes &amp; Content Notes
+                    </div>
+                    <p className="text-xs text-[#5B2302]/85 leading-relaxed">
+                      {currentBook.content_notes}
+                    </p>
+                  </div>
+                )}
+
+                {currentBook.has_scene_skip && (
+                  <div className="bg-[#FFFCF7] border border-[#5B2302]/25 rounded-2xl p-4 space-y-1.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 text-xs font-extrabold uppercase text-[#5B2302]">
+                        <Star size={15} color="#FFA5D5" variant="Bold" />
+                        Scene-Skip Guide
+                      </div>
+                      <span className="text-[11px] font-semibold text-[#5B2302]/75">
+                        Spicy scenes — we genuinely recommend skipping.
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#5B2302]/85 leading-relaxed">
+                      {currentBook.scene_skip_guide}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="relative pt-4 mt-6 border-t border-[#5B2302]/20 flex items-center justify-between text-[10px] text-[#5B2302]/70 font-bold uppercase tracking-wider">
+              <span>
+                Good Company Book Club &bull; Good books. Better debates.
+              </span>
+              <span>@readwithgoodcompany</span>
+            </div>
           </div>
         </div>
       )}
