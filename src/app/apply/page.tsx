@@ -133,11 +133,7 @@ export default function ApplyPage() {
                     htmlFor="full-name-input"
                     className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block"
                   >
-                    Preferred Name{" "}
-                    <span className="opacity-65 font-normal normal-case">
-                      (what should we call you?)
-                    </span>{" "}
-                    *
+                    Preferred Name *
                   </label>
                   <input
                     id="full-name-input"
