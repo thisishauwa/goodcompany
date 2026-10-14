@@ -201,7 +201,7 @@ export default function HomePage() {
               {/* Right Column: Featured Current Read, sitting on the paper note */}
               <div className="lg:col-span-6 flex justify-center lg:justify-end pt-4 lg:pt-0">
                 {currentBook && (
-                  <div className="relative w-[calc(100%+2rem)] -mx-4 sm:w-full sm:mx-0 max-w-[500px] sm:max-w-[580px] lg:max-w-[600px] lg:mr-0 aspect-[1849/1932] [container-type:inline-size]">
+                  <div className="relative w-[calc(100%+2rem)] -mx-4 sm:w-full sm:mx-0 max-w-125 sm:max-w-145 lg:max-w-150 lg:mr-0 aspect-1849/1932 @container">
                     {/* Paper note background art */}
                     <img
                       src="/images/paper.png"

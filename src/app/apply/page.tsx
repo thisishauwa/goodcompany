@@ -145,7 +145,7 @@ export default function ApplyPage() {
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    placeholder="e.g. Chic"
+                    placeholder="e.g. Chick"
                     className="flex h-10 w-full rounded-lg border border-[#5B2302]/20 bg-[#FFFDF9] px-3 py-2 text-sm text-[#5B2302] placeholder:text-[#5B2302]/40 transition-colors focus:outline-none focus:ring-1 focus:ring-[#5B2302] focus:border-[#5B2302]"
                   />
                 </div>
@@ -163,7 +163,7 @@ export default function ApplyPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="e.g. chic@gmail.com"
+                    placeholder="e.g. chick@gmail.com"
                     className="flex h-10 w-full rounded-lg border border-[#5B2302]/20 bg-[#FFFDF9] px-3 py-2 text-sm text-[#5B2302] placeholder:text-[#5B2302]/40 transition-colors focus:outline-none focus:ring-1 focus:ring-[#5B2302] focus:border-[#5B2302]"
                   />
                 </div>

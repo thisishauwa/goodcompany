@@ -215,7 +215,7 @@ export default function MemberIdPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F6EEE9] text-[#5B2302] font-body selection:bg-[#FFA5D5]">
+    <div className="min-h-screen flex flex-col bg-[#F6EEE9] text-[#5B2302] font-body selection:bg-accent-pink">
       <Navbar />
 
       <main className="flex-1 py-10 sm:py-16">
@@ -316,7 +316,7 @@ export default function MemberIdPage() {
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="e.g. Chic"
+                      placeholder="e.g. Chick"
                       className="flex h-10 w-full rounded-lg border border-[#5B2302]/20 bg-[#FFFDF9] px-3 py-2 text-sm text-[#5B2302] transition-colors placeholder:text-[#5B2302]/40 focus:outline-none focus:ring-1 focus:ring-[#5B2302] focus:border-[#5B2302]"
                     />
                   </div>

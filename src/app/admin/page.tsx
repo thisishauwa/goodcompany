@@ -380,7 +380,7 @@ export default function AdminPage() {
           {/* ========================================================================= */}
           <div className="space-y-5">
             {/* Search & Filter Bar */}
-            <div className="bg-[#FFFCF7] border border-[#5B2302]/20 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 shadow-none">
+            <div className="bg-paper-white border border-[#5B2302]/20 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 shadow-none">
               <div className="relative flex-1">
                 <SearchNormal1
                   size={16}
@@ -421,7 +421,7 @@ export default function AdminPage() {
             </div>
 
             {/* Book Catalog List */}
-            <div className="bg-[#FFFCF7] border border-[#5B2302]/20 rounded-2xl overflow-hidden divide-y divide-[#5B2302]/15 shadow-none">
+            <div className="bg-paper-white border border-[#5B2302]/20 rounded-2xl overflow-hidden divide-y divide-[#5B2302]/15 shadow-none">
               {filteredCatalogBooks.length === 0 ? (
                 <div className="p-12 text-center space-y-2">
                   <p className="font-script text-2xl text-[#5B2302]">
@@ -458,7 +458,7 @@ export default function AdminPage() {
                               Active Read
                             </span>
                           ) : b.status === "upcoming" ? (
-                            <span className="px-2 py-0.5 rounded-full bg-[#F5D978] text-[#5B2302] text-[9px] font-extrabold uppercase border border-[#5B2302]/20">
+                            <span className="px-2 py-0.5 rounded-full bg-butter-yellow text-[#5B2302] text-[9px] font-extrabold uppercase border border-[#5B2302]/20">
                               Upcoming
                             </span>
                           ) : (
@@ -512,7 +512,7 @@ export default function AdminPage() {
                       <button
                         type="button"
                         onClick={() => openEditModal(b)}
-                        className="h-9 px-3.5 rounded-lg bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-xs font-bold uppercase flex items-center gap-1.5 transition-colors shadow-none"
+                        className="h-9 px-3.5 rounded-lg bg-[#5B2302] text-[#F6EEE9] hover:bg-deep-burgundy text-xs font-bold uppercase flex items-center gap-1.5 transition-colors shadow-none"
                       >
                         <Edit2 size={14} color="#FFA5D5" variant="Bold" />
                         Edit Notes &amp; Guide
