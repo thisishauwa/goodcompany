@@ -290,7 +290,7 @@ export function BookDetailClient({ bookId }: { bookId: string }) {
                   <div className="flex items-center gap-2.5">
                     <Sparkles className="w-5 h-5 text-[#FFA5D5]" />
                     <h3 className="font-block text-xl uppercase text-[#5B2302]">
-                      Scene-Skip Guide
+                      Spicy Scenes Guide
                     </h3>
                   </div>
                   {skipGuideExpanded ? (
@@ -303,7 +303,7 @@ export function BookDetailClient({ bookId }: { bookId: string }) {
                 {skipGuideExpanded && (
                   <div className="pt-3 border-t border-[#5B2302]/10 font-body space-y-2">
                     <p className="text-xs font-semibold text-[#5B2302]/75">
-                      Spicy scenes — we genuinely recommend skipping.
+                      * We genuinely recommend skipping.
                     </p>
                     <p className="text-xs sm:text-sm text-[#5B2302]/85 leading-relaxed">
                       {book.scene_skip_guide}

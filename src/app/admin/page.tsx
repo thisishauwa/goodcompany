@@ -737,7 +737,7 @@ export default function AdminPage() {
                   <div className="flex items-center justify-between">
                     <label className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider flex items-center gap-1.5">
                       <Star size={15} color="#FFA5D5" variant="Bold" />
-                      Scene-Skip Guide
+                      Spicy Scenes Guide
                     </label>
                     <input
                       type="checkbox"

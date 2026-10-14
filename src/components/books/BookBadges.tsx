@@ -102,12 +102,14 @@ export function SpiceBadge({
 
   return (
     <span
-      className={`inline-flex items-center font-body font-semibold text-[#8A1405] select-none ${sizeClasses}`}
+      className={`inline-flex items-center whitespace-nowrap font-body font-semibold text-[#8A1405] select-none ${sizeClasses}`}
       title={`Spice Level: ${level}/5 — ${displayLabel} (${meta.desc})`}
     >
-      <span className="tracking-tighter select-none">{meta.chilis}</span>
+      <span className="tracking-tighter select-none whitespace-nowrap">
+        {meta.chilis}
+      </span>
       {showLabel && (
-        <span className="font-semibold text-[#8A1405]/90 tracking-tight">
+        <span className="font-semibold text-[#8A1405]/90 tracking-tight whitespace-nowrap">
           {displayLabel}
         </span>
       )}

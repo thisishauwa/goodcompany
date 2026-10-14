@@ -576,10 +576,10 @@ export default function HomePage() {
                 <div className="flex items-center justify-between gap-2 flex-wrap">
                   <div className="flex items-center gap-2 text-xs font-extrabold uppercase text-[#5B2302]">
                     <Star size={16} color="#FFA5D5" variant="Bold" />
-                    Scene-Skip Guide
+                    Spicy Scenes Guide
                   </div>
                   <span className="text-[11px] font-semibold text-[#5B2302]/75">
-                    Spicy scenes — we genuinely recommend skipping.
+                    * We genuinely recommend skipping.
                   </span>
                 </div>
                 <p className="text-xs sm:text-sm text-[#5B2302]/85 leading-relaxed">
@@ -663,8 +663,8 @@ export default function HomePage() {
                   />
                 </div>
                 <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#5B2302]/70">
+                  <div className="flex items-center gap-2 flex-nowrap">
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#5B2302]/70 whitespace-nowrap">
                       {currentBook.genre}
                     </span>
                     <RatingBadge rating={currentBook.rating} size="sm" />
@@ -767,10 +767,10 @@ export default function HomePage() {
                     <div className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2 text-xs font-extrabold uppercase text-[#5B2302]">
                         <Star size={15} color="#FFA5D5" variant="Bold" />
-                        Scene-Skip Guide
+                        Spicy Scenes Guide
                       </div>
                       <span className="text-[11px] font-semibold text-[#5B2302]/75">
-                        Spicy scenes — we genuinely recommend skipping.
+                        * We genuinely recommend skipping.
                       </span>
                     </div>
                     <p className="text-xs text-[#5B2302]/85 leading-relaxed">
