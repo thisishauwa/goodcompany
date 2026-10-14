@@ -131,7 +131,7 @@ const GUIDELINES_DATA: Guideline[] = [
     icon: HeartTick,
     paragraphs: [
       "Keep the WhatsApp group centred on books, gatherings and the occasional literary detour. No chain forwards, unrelated viral content, broadcast spam or constant business promotion.",
-      "Whenever a selection includes open-door romance, we provide content notes and a scene-skip guide—and we genuinely recommend skipping explicit or spicy scenes. You will not miss the plot, the character work, or the discussion. At events, tell the host if you do not want to appear in photographs or on @readwithgoodcompany. No explanation required.",
+      "Review content notes and scene-skip guides where provided — we genuinely recommend skipping the spicy scenes. At events, tell the host if you do not want to appear in photographs or on @readwithgoodcompany. No explanation required.",
     ],
     punchline: "And please RSVP honestly. If your plans change, update us.",
   },

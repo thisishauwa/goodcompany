@@ -384,14 +384,10 @@ export default function HomePage() {
                     .split("\n")
                     .filter(Boolean)
                     .map((line, idx) => {
-                      const colonIdx = line.indexOf(":");
-                      const hasPrefix = colonIdx > -1 && colonIdx < 20;
-                      const title = hasPrefix
-                        ? line.substring(0, colonIdx)
-                        : `Week ${idx + 1}`;
-                      const content = hasPrefix
-                        ? line.substring(colonIdx + 1).trim()
-                        : line;
+                      const title = `Week ${idx + 1}`;
+                      const content = line
+                        .replace(/^week\s*\d+\s*[:\-–—.]?\s*/i, "")
+                        .trim();
                       return (
                         <div
                           key={idx}
@@ -425,16 +421,16 @@ export default function HomePage() {
 
             {/* 3. SCENE-SKIP GUIDE */}
             {currentBook.has_scene_skip && (
-              <div className="p-5 rounded-2xl bg-[#F6EEE9]/70 space-y-2.5">
-                <div className="flex items-center gap-2 text-xs font-extrabold uppercase text-[#5B2302]">
-                  <Star size={16} color="#FFA5D5" variant="Bold" />
-                  Scene-Skip Guide
+              <div className="p-5 rounded-2xl bg-[#F6EEE9]/70 space-y-2">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <div className="flex items-center gap-2 text-xs font-extrabold uppercase text-[#5B2302]">
+                    <Star size={16} color="#FFA5D5" variant="Bold" />
+                    Scene-Skip Guide
+                  </div>
+                  <span className="text-[11px] font-semibold text-[#5B2302]/75">
+                    Spicy scenes — we genuinely recommend skipping.
+                  </span>
                 </div>
-                <p className="text-xs sm:text-sm font-semibold text-[#5B2302] bg-[#FFFCEB] border border-[#5B2302]/15 rounded-xl px-3.5 py-2.5 leading-relaxed">
-                  Club Note: We genuinely recommend skipping explicit or spicy
-                  scenes when reading—you won’t miss any of the plot, character
-                  arcs, or our discussion.
-                </p>
                 <p className="text-xs sm:text-sm text-[#5B2302]/85 leading-relaxed">
                   {currentBook.scene_skip_guide}
                 </p>

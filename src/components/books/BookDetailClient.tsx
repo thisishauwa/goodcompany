@@ -301,11 +301,9 @@ export function BookDetailClient({ bookId }: { bookId: string }) {
                 </div>
 
                 {skipGuideExpanded && (
-                  <div className="pt-3 border-t border-[#5B2302]/10 font-body space-y-2.5">
-                    <p className="text-xs sm:text-sm font-semibold text-[#5B2302] bg-[#FFFCEB] border border-[#5B2302]/15 rounded-xl px-3.5 py-2.5 leading-relaxed">
-                      Club Note: We genuinely recommend skipping explicit or
-                      spicy scenes when reading—you won’t miss any of the plot,
-                      character arcs, or our discussion.
+                  <div className="pt-3 border-t border-[#5B2302]/10 font-body space-y-2">
+                    <p className="text-xs font-semibold text-[#5B2302]/75">
+                      Spicy scenes — we genuinely recommend skipping.
                     </p>
                     <p className="text-xs sm:text-sm text-[#5B2302]/85 leading-relaxed">
                       {book.scene_skip_guide}
