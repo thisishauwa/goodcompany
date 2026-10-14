@@ -149,21 +149,15 @@ export default function AdminPage() {
     setEditingBook(null);
   };
 
-  // Delete Book action with confirmation
+  // Delete Book action
   const handleDeleteBook = (id: string, title: string) => {
     if (books.length <= 1) {
       addToast("The library needs at least one book.", "error");
       return;
     }
 
-    if (
-      confirm(
-        `Are you sure you want to remove "${title}"? This will delete it from the catalog and server disk.`,
-      )
-    ) {
-      deleteBook(id);
-      addToast(`Removed "${title}" from the catalog.`, "info");
-    }
+    deleteBook(id);
+    addToast(`Removed "${title}" from the catalog.`, "info");
   };
 
   // Open Library Search for Add Book Modal

@@ -548,12 +548,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   };
 
   const deleteBook = (id: string) => {
-    setBooks((prev) => {
-      const remaining = prev.filter((b) => b.id !== id);
-      syncCuratorData(remaining);
-      return remaining;
-    });
-    addToast("Book removed from catalog.");
+    const remaining = books.filter((b) => b.id !== id);
+    if (remaining.length > 0 && !remaining.some((b) => b.is_current)) {
+      remaining[0] = {
+        ...remaining[0],
+        is_current: true,
+        status: "currently_reading",
+      };
+    }
+    setBooks(remaining);
+    syncCuratorData(remaining);
   };
 
   const setCurrentBook = (id: string) => {
