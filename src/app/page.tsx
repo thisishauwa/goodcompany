@@ -249,7 +249,7 @@ export default function HomePage() {
                           <h3 className="font-block text-[4.5cqi] text-[#5B2302] uppercase leading-[1.02] tracking-tight line-clamp-3">
                             {currentBook.title}
                           </h3>
-                          <p className="font-script text-[4.8cqi] text-[#5B2302] leading-tight truncate">
+                          <p className="font-script text-[4.8cqi] text-[#5B2302] leading-normal py-[0.3cqi] pl-[0.6cqi] -ml-[0.6cqi] whitespace-nowrap overflow-visible">
                             by {currentBook.author}
                           </p>
                           <div className="flex flex-wrap items-center gap-x-[2cqi] gap-y-[0.6cqi] pt-[0.5cqi] origin-left scale-90 sm:scale-100">
@@ -463,7 +463,7 @@ export default function HomePage() {
                   <h3 className="font-block text-2xl sm:text-3xl uppercase text-[#5B2302] leading-tight">
                     {currentBook.title}
                   </h3>
-                  <p className="font-script text-2xl text-[#5B2302] leading-none">
+                  <p className="font-script text-2xl text-[#5B2302] leading-normal py-0.5 pl-1 -ml-1 overflow-visible">
                     by {currentBook.author}
                   </p>
                   <div className="flex flex-wrap items-center gap-2 pt-1">
