@@ -1,43 +1,43 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { Navbar } from '@/components/navigation/Navbar';
-import { Footer } from '@/components/navigation/Footer';
-import { ToastContainer } from '@/components/ui/ToastContainer';
-import { StarFlair } from '@/components/ui/Illustrations';
-import { AlertCircle, ArrowLeft, MessageCircle } from 'lucide-react';
+import React, { useState } from "react";
+import Link from "next/link";
+import { Navbar } from "@/components/navigation/Navbar";
+import { Footer } from "@/components/navigation/Footer";
+import { ToastContainer } from "@/components/ui/ToastContainer";
+import { StarFlair } from "@/components/ui/Illustrations";
+import { AlertCircle, ArrowLeft, MessageCircle } from "lucide-react";
 
-const WHATSAPP_NUMBER = '2348085150662';
+const WHATSAPP_NUMBER = "2348085150662";
 
 const GENRE_OPTIONS = [
-  'Romance',
-  'Literary Fiction',
-  'Contemporary Fiction',
-  'Fantasy & Sci-Fi',
-  'Memoir & Biography',
-  'Historical Fiction',
-  'Thrillers & Mystery',
-  'Non-Fiction & Essays',
-  'African Literature',
-  'Poetry',
+  "Romance",
+  "Literary Fiction",
+  "Contemporary Fiction",
+  "Fantasy & Sci-Fi",
+  "Memoir & Biography",
+  "Historical Fiction",
+  "Thrillers & Mystery",
+  "Non-Fiction & Essays",
+  "African Literature",
+  "Poetry",
 ];
 
 export default function ApplyPage() {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [city, setCity] = useState('');
-  const [favouriteBook, setFavouriteBook] = useState('');
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
+  const [favouriteBook, setFavouriteBook] = useState("");
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-  const [whatTheyWant, setWhatTheyWant] = useState('');
-  const [howTheyHeard, setHowTheyHeard] = useState('');
+  const [whatTheyWant, setWhatTheyWant] = useState("");
+  const [howTheyHeard, setHowTheyHeard] = useState("");
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const toggleGenre = (genre: string) => {
     setSelectedGenres((prev) =>
-      prev.includes(genre) ? prev.filter((g) => g !== genre) : [...prev, genre]
+      prev.includes(genre) ? prev.filter((g) => g !== genre) : [...prev, genre],
     );
   };
 
@@ -45,8 +45,15 @@ export default function ApplyPage() {
     e.preventDefault();
     setErrorMessage(null);
 
-    if (!fullName.trim() || !email.trim() || !phone.trim() || !favouriteBook.trim()) {
-      setErrorMessage("Please fill in your name, email, phone number, and the book you'd defend with your life.");
+    if (
+      !fullName.trim() ||
+      !email.trim() ||
+      !phone.trim() ||
+      !favouriteBook.trim()
+    ) {
+      setErrorMessage(
+        "Please fill in your name, email, phone number, and the book you'd defend with your life.",
+      );
       return;
     }
 
@@ -63,7 +70,7 @@ export default function ApplyPage() {
       favouriteBook.trim(),
       ``,
       selectedGenres.length > 0
-        ? `*Genres I love:* ${selectedGenres.join(', ')}`
+        ? `*Genres I love:* ${selectedGenres.join(", ")}`
         : null,
       whatTheyWant.trim()
         ? `*What I'm looking for:* ${whatTheyWant.trim()}`
@@ -73,13 +80,13 @@ export default function ApplyPage() {
         : null,
     ]
       .filter(Boolean)
-      .join('\n');
+      .join("\n");
 
     const encodedMessage = encodeURIComponent(lines);
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
     // Open WhatsApp in a new tab
-    window.open(whatsappUrl, '_blank');
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
@@ -106,7 +113,8 @@ export default function ApplyPage() {
                 Join Good Company
               </h1>
               <p className="text-xs sm:text-sm text-[#5B2302]/80 leading-relaxed max-w-lg">
-                Tell us a little about your reading life so our curators can review your application.
+                Tell us a little about your reading life so our curators can
+                review your application.
               </p>
             </div>
 
@@ -118,11 +126,18 @@ export default function ApplyPage() {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Full name & Email */}
+              {/* Preferred name & Email */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label htmlFor="full-name-input" className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block">
-                    Full Name *
+                  <label
+                    htmlFor="full-name-input"
+                    className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block"
+                  >
+                    Preferred Name{" "}
+                    <span className="opacity-65 font-normal normal-case">
+                      (what should we call you?)
+                    </span>{" "}
+                    *
                   </label>
                   <input
                     id="full-name-input"
@@ -130,13 +145,16 @@ export default function ApplyPage() {
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    placeholder="e.g. Amaka Okafor"
+                    placeholder="e.g. Chic"
                     className="flex h-10 w-full rounded-lg border border-[#5B2302]/20 bg-[#FFFDF9] px-3 py-2 text-sm text-[#5B2302] placeholder:text-[#5B2302]/40 transition-colors focus:outline-none focus:ring-1 focus:ring-[#5B2302] focus:border-[#5B2302]"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label htmlFor="email-input" className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block">
+                  <label
+                    htmlFor="email-input"
+                    className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block"
+                  >
                     Email Address *
                   </label>
                   <input
@@ -145,7 +163,7 @@ export default function ApplyPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="e.g. amaka@example.com"
+                    placeholder="e.g. chic@gmail.com"
                     className="flex h-10 w-full rounded-lg border border-[#5B2302]/20 bg-[#FFFDF9] px-3 py-2 text-sm text-[#5B2302] placeholder:text-[#5B2302]/40 transition-colors focus:outline-none focus:ring-1 focus:ring-[#5B2302] focus:border-[#5B2302]"
                   />
                 </div>
@@ -154,8 +172,12 @@ export default function ApplyPage() {
               {/* Phone & City */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label htmlFor="phone-input" className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block">
-                    Phone Number <span className="text-[#5B2302] font-black">*</span>
+                  <label
+                    htmlFor="phone-input"
+                    className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block"
+                  >
+                    Phone Number{" "}
+                    <span className="text-[#5B2302] font-black">*</span>
                   </label>
                   <input
                     id="phone-input"
@@ -169,8 +191,14 @@ export default function ApplyPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label htmlFor="city-input" className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block">
-                    City <span className="opacity-60 font-normal lowercase">(optional)</span>
+                  <label
+                    htmlFor="city-input"
+                    className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block"
+                  >
+                    City{" "}
+                    <span className="opacity-60 font-normal lowercase">
+                      (optional)
+                    </span>
                   </label>
                   <input
                     id="city-input"
@@ -185,7 +213,10 @@ export default function ApplyPage() {
 
               {/* Favourite Book */}
               <div className="space-y-1.5">
-                <label htmlFor="fav-book-input" className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block">
+                <label
+                  htmlFor="fav-book-input"
+                  className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block"
+                >
                   The Book You&apos;d Defend With Your Life *
                 </label>
                 <input
@@ -214,8 +245,8 @@ export default function ApplyPage() {
                         onClick={() => toggleGenre(genre)}
                         className={`h-8 px-3 rounded-lg text-xs font-semibold transition-all inline-flex items-center justify-center border ${
                           selected
-                            ? 'bg-[#5B2302] text-[#F6EEE9] border-[#5B2302]'
-                            : 'bg-[#FFFDF9] text-[#5B2302] border-[#5B2302]/20 hover:border-[#5B2302]'
+                            ? "bg-[#5B2302] text-[#F6EEE9] border-[#5B2302]"
+                            : "bg-[#FFFDF9] text-[#5B2302] border-[#5B2302]/20 hover:border-[#5B2302]"
                         }`}
                       >
                         {genre}
@@ -227,7 +258,10 @@ export default function ApplyPage() {
 
               {/* What they want from club */}
               <div className="space-y-1.5">
-                <label htmlFor="what-they-want-input" className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block">
+                <label
+                  htmlFor="what-they-want-input"
+                  className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block"
+                >
                   What are you looking for in a reading group?
                 </label>
                 <textarea
@@ -242,8 +276,14 @@ export default function ApplyPage() {
 
               {/* How they heard */}
               <div className="space-y-1.5">
-                <label htmlFor="how-heard-input" className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block">
-                  How did you hear about Good Company? <span className="opacity-60 font-normal lowercase">(optional)</span>
+                <label
+                  htmlFor="how-heard-input"
+                  className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block"
+                >
+                  How did you hear about Good Company?{" "}
+                  <span className="opacity-60 font-normal lowercase">
+                    (optional)
+                  </span>
                 </label>
                 <input
                   id="how-heard-input"

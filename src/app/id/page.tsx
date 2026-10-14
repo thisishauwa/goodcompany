@@ -306,17 +306,17 @@ export default function MemberIdPage() {
 
               {/* Form Fields - shadcn/ui Inspired Style */}
               <div className="space-y-4 pt-4 border-t border-[#5B2302]/10">
-                {/* Full Name & Member ID */}
+                {/* Preferred Name & Member ID */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-[#5B2302] uppercase tracking-wider block">
-                      Full Name
+                      Preferred Name
                     </label>
                     <input
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="e.g. Amaka Okafor"
+                      placeholder="e.g. Chic"
                       className="flex h-10 w-full rounded-lg border border-[#5B2302]/20 bg-[#FFFDF9] px-3 py-2 text-sm text-[#5B2302] transition-colors placeholder:text-[#5B2302]/40 focus:outline-none focus:ring-1 focus:ring-[#5B2302] focus:border-[#5B2302]"
                     />
                   </div>
