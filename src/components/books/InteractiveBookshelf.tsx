@@ -238,13 +238,13 @@ export function InteractiveBookshelf({
             </div>
 
             {/* Two-Column Open Book Spread */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-center">
               {/* Left Column: 3D Real Book Artwork with Apple Books Spine */}
               <div className="md:col-span-5 flex justify-center">
                 <div className="relative">
                   <BookCover
                     book={selectedBook}
-                    size="lg"
+                    className="w-[140px] h-[204px] sm:w-[180px] sm:h-[260px] md:w-[220px] md:h-[320px] shadow-lg"
                     showBookmark={selectedBook.is_current}
                     showBadge={false}
                   />
@@ -255,21 +255,33 @@ export function InteractiveBookshelf({
               {/* Right Column: Editorial Folio Details */}
               <div className="md:col-span-7 space-y-4">
                 <div>
-                  <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1.5 whitespace-nowrap">
                     <span className="text-xs font-bold uppercase tracking-wider text-[#5B2302]/70">
                       {selectedBook.genre}
                     </span>
+                    <span className="text-[#5B2302]/30 select-none text-xs" aria-hidden="true">
+                      &bull;
+                    </span>
                     <RatingBadge
                       rating={selectedBook.rating}
-                      size="sm"
-                      showMax
+                      size="md"
+                      showMax={false}
+                      className="font-bold gap-1"
                     />
-                    <SpiceBadge level={selectedBook.spice_level} size="sm" />
+                    <span className="text-[#5B2302]/30 select-none text-xs" aria-hidden="true">
+                      &bull;
+                    </span>
+                    <SpiceBadge
+                      level={selectedBook.spice_level}
+                      size="md"
+                      className="font-bold gap-1"
+                      labelClassName="hidden sm:inline"
+                    />
                   </div>
-                  <h3 className="font-block text-3xl sm:text-4xl text-[#5B2302] uppercase leading-[1.05]">
+                  <h3 className="font-block text-2xl sm:text-3xl md:text-4xl text-[#5B2302] uppercase leading-[1.05]">
                     {selectedBook.title}
                   </h3>
-                  <p className="font-script text-2xl text-[#5B2302] mt-1">
+                  <p className="font-script text-xl sm:text-2xl text-[#5B2302] mt-1">
                     by {selectedBook.author}
                   </p>
                 </div>
