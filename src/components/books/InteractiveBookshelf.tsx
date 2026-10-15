@@ -332,7 +332,7 @@ export function InteractiveBookshelf({
                     className="clean-btn w-full sm:w-auto px-6 py-3.5 sm:py-3 rounded-full bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-xs sm:text-sm font-extrabold uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-sm"
                   >
                     <Book1 size={18} color="#FFA5D5" variant="Bold" />
-                    Reading Guide & Pacing &rarr;
+                    Weekly Pacing Guide &rarr;
                   </Link>
                 </div>
               </div>
