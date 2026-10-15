@@ -165,10 +165,10 @@ export default function HomePage() {
 
                 {/* Berthold Block Headline - Pure crisp text, zero shadows */}
                 <div className="space-y-1">
-                  <h1 className="font-block text-5xl sm:text-6xl lg:text-7xl text-[#5B2302] uppercase leading-[0.95] tracking-tight">
-                    Good books.
+                  <h1 className="font-block text-[clamp(2.15rem,9.2vw,3rem)] sm:text-6xl lg:text-7xl text-[#5B2302] uppercase leading-[0.95] tracking-tight">
+                    <span className="whitespace-nowrap">Good books.</span>
                     <br />
-                    Better debates.
+                    <span className="whitespace-nowrap">Better debates.</span>
                   </h1>
                 </div>
 
