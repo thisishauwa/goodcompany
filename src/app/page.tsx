@@ -152,10 +152,10 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
               {/* Left Column: Bold Berthold Block Headline & Pitch */}
-              <div className="lg:col-span-6 space-y-3 sm:space-y-6">
+              <div className="lg:col-span-6 space-y-3.5 sm:space-y-6">
                 {/* Berthold Block Headline - Pure crisp text, zero shadows */}
                 <div className="space-y-1">
-                  <h1 className="font-block text-[clamp(2.15rem,9.2vw,3rem)] sm:text-6xl lg:text-7xl text-[#5B2302] uppercase leading-[0.95] tracking-tight">
+                  <h1 className="font-block text-[clamp(2.4rem,9.8vw,3.5rem)] sm:text-6xl lg:text-7xl text-[#5B2302] uppercase leading-[0.95] tracking-tight">
                     <span className="whitespace-nowrap">Good books.</span>
                     <br />
                     <span className="whitespace-nowrap">Better debates.</span>
@@ -170,7 +170,7 @@ export default function HomePage() {
                 </p>
 
                 {/* Primary Actions - Stacked vertically on mobile (flex-col), row on desktop */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-3.5 sm:pt-2 w-full sm:w-auto">
                   <Link
                     href="/apply"
                     className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-xs font-extrabold uppercase tracking-wider border border-[#5B2302] transition-colors w-full sm:w-auto text-center shadow-none active:scale-[0.99]"
