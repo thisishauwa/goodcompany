@@ -153,16 +153,6 @@ export default function HomePage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
               {/* Left Column: Bold Berthold Block Headline & Pitch */}
               <div className="lg:col-span-6 space-y-6">
-                {/* Accent Tag */}
-                <div className="inline-flex items-center gap-2">
-                  <span className="px-3.5 py-1 rounded-full bg-[#FFA5D5] text-[#5B2302] text-xs font-extrabold uppercase tracking-wider font-body border border-[#5B2302]/20">
-                    Good Company Book Club
-                  </span>
-                  <span className="font-script text-2xl text-[#5B2302]">
-                    est. 2026
-                  </span>
-                </div>
-
                 {/* Berthold Block Headline - Pure crisp text, zero shadows */}
                 <div className="space-y-1">
                   <h1 className="font-block text-[clamp(2.15rem,9.2vw,3rem)] sm:text-6xl lg:text-7xl text-[#5B2302] uppercase leading-[0.95] tracking-tight">
@@ -325,9 +315,14 @@ export default function HomePage() {
         {/* ========================================================================= */}
         <section id="about" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <span className="px-3 py-1 rounded-full bg-[#FFA5D5] text-[#5B2302] text-xs font-extrabold uppercase tracking-wider font-body border border-[#5B2302]/20 inline-block mb-3">
-              The Club
-            </span>
+            <div className="flex items-center gap-2.5 mb-3">
+              <span className="px-3 py-1 rounded-full bg-[#FFA5D5] text-[#5B2302] text-xs font-extrabold uppercase tracking-wider font-body border border-[#5B2302]/20 inline-block">
+                The Club
+              </span>
+              <span className="font-script text-xl sm:text-2xl text-[#5B2302]/70">
+                est. 2026
+              </span>
+            </div>
             <h2 className="font-block text-3xl sm:text-4xl text-[#5B2302] uppercase leading-none">
               What happens here
             </h2>
