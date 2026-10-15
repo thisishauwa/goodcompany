@@ -242,16 +242,23 @@ export default function HomePage() {
                           <p className="font-script text-[4.8cqi] text-[#5B2302] leading-normal py-[0.3cqi] pl-[0.6cqi] -ml-[0.6cqi] whitespace-nowrap overflow-visible">
                             by {currentBook.author}
                           </p>
-                          <div className="flex flex-wrap items-center gap-x-[2.4cqi] gap-y-[0.8cqi] pt-[0.6cqi]">
+                          <div className="flex items-center gap-1.5 sm:gap-[1.5cqi] pt-[0.4cqi] whitespace-nowrap overflow-hidden">
                             <RatingBadge
                               rating={currentBook.rating}
                               size="md"
-                              className="text-xs sm:text-sm lg:text-[2.8cqi] gap-1 sm:gap-1.5 font-bold"
+                              className="text-xs sm:text-sm lg:text-[2.6cqi] gap-1 shrink-0 font-bold"
                             />
+                            <span
+                              className="text-[#5B2302]/40 text-xs sm:text-sm lg:text-[2.4cqi] select-none shrink-0"
+                              aria-hidden="true"
+                            >
+                              &bull;
+                            </span>
                             <SpiceBadge
                               level={currentBook.spice_level}
                               size="md"
-                              className="text-xs sm:text-sm lg:text-[2.8cqi] gap-1 sm:gap-1.5 font-bold"
+                              className="text-xs sm:text-sm lg:text-[2.6cqi] gap-1 shrink-0 font-bold"
+                              labelClassName="hidden sm:inline"
                             />
                           </div>
                         </div>
@@ -490,8 +497,9 @@ export default function HomePage() {
                 <p className="font-script text-xl sm:text-2xl text-[#5B2302] leading-normal py-0.5 pl-1 -ml-1 overflow-visible">
                   by {currentBook.author}
                 </p>
-                <div className="flex flex-wrap items-center gap-2 pt-0.5">
+                <div className="flex items-center gap-2 pt-0.5 whitespace-nowrap">
                   <RatingBadge rating={currentBook.rating} size="md" />
+                  <span className="text-[#5B2302]/40 text-xs sm:text-sm select-none" aria-hidden="true">&bull;</span>
                   <SpiceBadge level={currentBook.spice_level} size="md" />
                 </div>
               </div>

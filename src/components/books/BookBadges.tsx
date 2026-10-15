@@ -1,4 +1,5 @@
 import React from "react";
+import { Star } from "iconsax-react";
 
 export const SPICE_LEVEL_METADATA: Record<
   number,
@@ -61,12 +62,23 @@ export function RatingBadge({
     lg: "text-sm sm:text-base gap-2",
   }[size];
 
+  const starSizes = {
+    sm: 12,
+    md: 14,
+    lg: 16,
+  }[size];
+
   return (
     <span
       className={`inline-flex items-center font-body font-semibold text-[#5B2302] select-none ${sizeClasses} ${className}`}
       title={`Community Rating: ${rating.toFixed(1)} out of 5`}
     >
-      <span className="text-[#D97706] text-inherit leading-none">★</span>
+      <Star
+        size={starSizes}
+        color="#D97706"
+        variant="Bold"
+        className="shrink-0"
+      />
       <span className="font-bold tracking-tight leading-none">{rating.toFixed(1)}</span>
       {showMax && (
         <span className="text-[#5B2302]/50 font-normal text-[10px] leading-none">/5</span>
@@ -79,11 +91,13 @@ export function SpiceBadge({
   level,
   size = "md",
   showLabel = true,
+  labelClassName = "",
   className = "",
 }: {
   level?: number;
   size?: "sm" | "md" | "lg";
   showLabel?: boolean;
+  labelClassName?: string;
   className?: string;
 }) {
   if (level === undefined || level === null) return null;
@@ -113,7 +127,7 @@ export function SpiceBadge({
         {meta.chilis}
       </span>
       {showLabel && (
-        <span className="font-semibold text-[#8A1405]/90 tracking-tight whitespace-nowrap leading-none">
+        <span className={`font-semibold text-[#8A1405]/90 tracking-tight whitespace-nowrap leading-none ${labelClassName}`}>
           {displayLabel}
         </span>
       )}
