@@ -147,12 +147,12 @@ export default function HomePage() {
         {/* ========================================================================= */}
         <section
           id="current-read"
-          className="relative pt-12 pb-16 sm:pt-16 sm:pb-20 md:pt-20 md:pb-24 lg:pt-8 lg:pb-16 border-b border-[#5B2302]/15 scroll-mt-28 overflow-hidden"
+          className="relative pt-8 pb-12 sm:pt-16 sm:pb-20 md:pt-20 md:pb-24 lg:pt-8 lg:pb-16 border-b border-[#5B2302]/15 scroll-mt-28 overflow-hidden"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
               {/* Left Column: Bold Berthold Block Headline & Pitch */}
-              <div className="lg:col-span-6 space-y-6">
+              <div className="lg:col-span-6 space-y-3 sm:space-y-6">
                 {/* Berthold Block Headline - Pure crisp text, zero shadows */}
                 <div className="space-y-1">
                   <h1 className="font-block text-[clamp(2.15rem,9.2vw,3rem)] sm:text-6xl lg:text-7xl text-[#5B2302] uppercase leading-[0.95] tracking-tight">
@@ -170,7 +170,7 @@ export default function HomePage() {
                 </p>
 
                 {/* Primary Actions - Stacked vertically on mobile (flex-col), row on desktop */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2 w-full sm:w-auto">
                   <Link
                     href="/apply"
                     className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-xs font-extrabold uppercase tracking-wider border border-[#5B2302] transition-colors w-full sm:w-auto text-center shadow-none active:scale-[0.99]"
@@ -189,7 +189,7 @@ export default function HomePage() {
               </div>
 
               {/* Right Column: Featured Current Read, sitting on the paper note */}
-              <div className="lg:col-span-6 flex justify-center lg:justify-end pt-4 lg:pt-0">
+              <div className="lg:col-span-6 flex justify-center lg:justify-end pt-2 sm:pt-4 lg:pt-0">
                 {currentBook && (
                   <div className="relative w-[calc(100%+2rem)] -mx-4 sm:w-full sm:mx-0 max-w-125 sm:max-w-145 lg:max-w-150 lg:mr-0 aspect-1849/1932 @container">
                     {/* Paper note background art */}
