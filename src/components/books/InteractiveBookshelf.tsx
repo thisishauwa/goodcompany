@@ -199,7 +199,7 @@ export function InteractiveBookshelf({
           onClick={() => setSelectedBook(null)}
         >
           <div
-            className="relative w-full max-w-3xl bg-[#FFFCF7] rounded-3xl p-6 sm:p-9 shadow-2xl border-2 border-[#5B2302] max-h-[90vh] overflow-y-auto"
+            className="relative w-full max-w-3xl bg-[#FFFCF7] rounded-3xl p-4 sm:p-9 shadow-2xl border-2 border-[#5B2302] max-h-[92vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top Toolbar */}
@@ -256,7 +256,7 @@ export function InteractiveBookshelf({
               <div className="md:col-span-7 space-y-4">
                 <div>
                   <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#5B2302]/70">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#5B2302]/70">
                       {selectedBook.genre}
                     </span>
                     <RatingBadge
@@ -274,25 +274,25 @@ export function InteractiveBookshelf({
                   </p>
                 </div>
 
-                <p className="text-sm text-[#5B2302]/85 leading-relaxed font-normal">
+                <p className="text-sm sm:text-base text-[#5B2302]/85 leading-relaxed font-normal">
                   {selectedBook.description}
                 </p>
 
                 {/* CURATOR'S EDITORIAL TAKE */}
                 {selectedBook.curator_note && (
                   <div className="p-4 sm:p-5 rounded-2xl bg-[#FFFCEB] border border-[#5B2302]/15 space-y-1.5 font-body">
-                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#5B2302] block">
+                    <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-[#5B2302] block">
                       Curator’s Editorial Take
                     </span>
-                    <p className="text-xs sm:text-sm text-[#5B2302] leading-relaxed font-normal">
+                    <p className="text-sm sm:text-base text-[#5B2302] leading-relaxed font-normal">
                       {selectedBook.curator_note}
                     </p>
                   </div>
                 )}
 
-                <div className="pt-2 flex flex-wrap gap-4 text-xs text-[#5B2302]/85">
+                <div className="pt-2 flex flex-wrap gap-4 text-xs sm:text-sm text-[#5B2302]/85">
                   <div className="flex items-center gap-1.5">
-                    <Calendar size={15} color="#5B2302" variant="Bold" />
+                    <Calendar size={16} color="#5B2302" variant="Bold" />
                     <span>
                       <strong>Period:</strong> {selectedBook.reading_start_date}{" "}
                       – {selectedBook.reading_end_date}
@@ -317,9 +317,9 @@ export function InteractiveBookshelf({
                 <div className="pt-4 border-t border-[#5B2302]/15 flex flex-wrap items-center gap-3">
                   <Link
                     href={`/books/${selectedBook.id}`}
-                    className="clean-btn px-6 py-3 rounded-full bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-xs font-extrabold uppercase tracking-wider inline-flex items-center gap-2"
+                    className="clean-btn w-full sm:w-auto px-6 py-3.5 sm:py-3 rounded-full bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-xs sm:text-sm font-extrabold uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-sm"
                   >
-                    <Book1 size={15} color="#FFA5D5" variant="Bold" />
+                    <Book1 size={18} color="#FFA5D5" variant="Bold" />
                     Reading Guide & Pacing &rarr;
                   </Link>
                 </div>

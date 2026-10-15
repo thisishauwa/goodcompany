@@ -1057,14 +1057,14 @@ export default function MemberIdPage() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-[#FFFCF7] border border-[#5B2302]/20 rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto no-scrollbar relative p-6 space-y-4 font-body animate-in zoom-in-95 duration-200"
+            className="bg-[#FFFCF7] border border-[#5B2302]/20 rounded-2xl max-w-lg w-full max-h-[92vh] overflow-y-auto no-scrollbar relative p-4 sm:p-6 space-y-4 font-body animate-in zoom-in-95 duration-200"
           >
             <div className="flex items-center justify-between border-b border-[#5B2302]/15 pb-3">
               <div>
                 <h3 className="font-block text-xl text-[#5B2302] uppercase tracking-tight">
                   Your ID Badge is Ready
                 </h3>
-                <p className="text-xs text-[#5B2302]/70">
+                <p className="text-xs sm:text-sm text-[#5B2302]/70">
                   PNG file sent directly to your Downloads folder.
                 </p>
               </div>
@@ -1087,7 +1087,7 @@ export default function MemberIdPage() {
               />
             </div>
 
-            <p className="text-[11px] text-[#5B2302]/70 text-center">
+            <p className="text-xs text-[#5B2302]/75 text-center leading-relaxed">
               If on iOS or Safari, you can also press &amp; hold (or
               right-click) the image above to save directly to Photos.
             </p>
@@ -1099,14 +1099,14 @@ export default function MemberIdPage() {
                   .trim()
                   .toLowerCase()
                   .replace(/[^a-z0-9]+/g, "-")}-${exportFormat}.png`}
-                className="flex-1 py-3 rounded-full bg-[#5B2302] text-[#F6EEE9] text-xs font-extrabold uppercase text-center hover:bg-[#3D1600] transition-colors shadow-sm"
+                className="flex-1 py-3 sm:py-3 rounded-full bg-[#5B2302] text-[#F6EEE9] text-xs sm:text-sm font-extrabold uppercase text-center hover:bg-[#3D1600] transition-colors shadow-sm"
               >
                 Download PNG Again
               </a>
               <button
                 type="button"
                 onClick={() => setPreviewModalImage(null)}
-                className="px-5 py-3 rounded-full border border-[#5B2302]/30 text-[#5B2302] text-xs font-bold uppercase hover:bg-white transition-colors"
+                className="px-5 py-3 rounded-full border border-[#5B2302]/30 text-[#5B2302] text-xs sm:text-sm font-bold uppercase hover:bg-white transition-colors"
               >
                 Done
               </button>

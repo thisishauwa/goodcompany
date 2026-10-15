@@ -46,28 +46,30 @@ export function RatingBadge({
   rating,
   size = "md",
   showMax = false,
+  className = "",
 }: {
   rating?: number;
   size?: "sm" | "md" | "lg";
   showMax?: boolean;
+  className?: string;
 }) {
   if (rating === undefined || rating === null) return null;
 
   const sizeClasses = {
     sm: "text-[11px] gap-1",
-    md: "text-xs gap-1.5",
-    lg: "text-sm gap-1.5",
+    md: "text-xs sm:text-sm gap-1.5",
+    lg: "text-sm sm:text-base gap-2",
   }[size];
 
   return (
     <span
-      className={`inline-flex items-center font-body font-semibold text-[#5B2302] select-none ${sizeClasses}`}
+      className={`inline-flex items-center font-body font-semibold text-[#5B2302] select-none ${sizeClasses} ${className}`}
       title={`Community Rating: ${rating.toFixed(1)} out of 5`}
     >
-      <span className="text-[#D97706] text-xs">★</span>
-      <span className="font-bold tracking-tight">{rating.toFixed(1)}</span>
+      <span className="text-[#D97706] text-inherit leading-none">★</span>
+      <span className="font-bold tracking-tight leading-none">{rating.toFixed(1)}</span>
       {showMax && (
-        <span className="text-[#5B2302]/50 font-normal text-[10px]">/5</span>
+        <span className="text-[#5B2302]/50 font-normal text-[10px] leading-none">/5</span>
       )}
     </span>
   );
@@ -77,10 +79,12 @@ export function SpiceBadge({
   level,
   size = "md",
   showLabel = true,
+  className = "",
 }: {
   level?: number;
   size?: "sm" | "md" | "lg";
   showLabel?: boolean;
+  className?: string;
 }) {
   if (level === undefined || level === null) return null;
 
@@ -93,8 +97,8 @@ export function SpiceBadge({
 
   const sizeClasses = {
     sm: "text-[11px] gap-1",
-    md: "text-xs gap-1.5",
-    lg: "text-sm gap-1.5",
+    md: "text-xs sm:text-sm gap-1.5",
+    lg: "text-sm sm:text-base gap-2",
   }[size];
 
   // Capitalize first letter properly (e.g. Steamy, Mild, Warm, Scorching)
@@ -102,14 +106,14 @@ export function SpiceBadge({
 
   return (
     <span
-      className={`inline-flex items-center whitespace-nowrap font-body font-semibold text-[#8A1405] select-none ${sizeClasses}`}
+      className={`inline-flex items-center whitespace-nowrap font-body font-semibold text-[#8A1405] select-none ${sizeClasses} ${className}`}
       title={`Spice Level: ${level}/5 — ${displayLabel} (${meta.desc})`}
     >
-      <span className="tracking-tighter select-none whitespace-nowrap">
+      <span className="tracking-tighter select-none whitespace-nowrap text-inherit leading-none">
         {meta.chilis}
       </span>
       {showLabel && (
-        <span className="font-semibold text-[#8A1405]/90 tracking-tight whitespace-nowrap">
+        <span className="font-semibold text-[#8A1405]/90 tracking-tight whitespace-nowrap leading-none">
           {displayLabel}
         </span>
       )}

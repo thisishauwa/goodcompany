@@ -219,7 +219,7 @@ export function Navbar() {
               <Link
                 href="/apply"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3.5 rounded-full bg-[#5B2302] text-[#F6EEE9] text-xs font-extrabold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-[#3D1600] active:scale-[0.99] transition-all border border-[#5B2302]"
+                className="w-full py-3.5 rounded-full bg-[#5B2302] text-[#F6EEE9] text-sm font-extrabold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#3D1600] active:scale-[0.99] transition-all border border-[#5B2302] shadow-sm"
               >
                 <StarFlair className="w-4 h-4 text-[#FFA5D5]" />
                 Apply to Join

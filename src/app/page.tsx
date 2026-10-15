@@ -147,7 +147,7 @@ export default function HomePage() {
         {/* ========================================================================= */}
         <section
           id="current-read"
-          className="relative pt-12 pb-16 sm:pt-20 sm:pb-24 md:pt-28 md:pb-32 border-b border-[#5B2302]/15 scroll-mt-28 overflow-hidden"
+          className="relative pt-12 pb-16 sm:pt-16 sm:pb-20 md:pt-20 md:pb-24 lg:pt-8 lg:pb-16 border-b border-[#5B2302]/15 scroll-mt-28 overflow-hidden"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
@@ -252,26 +252,28 @@ export default function HomePage() {
                           <p className="font-script text-[4.8cqi] text-[#5B2302] leading-normal py-[0.3cqi] pl-[0.6cqi] -ml-[0.6cqi] whitespace-nowrap overflow-visible">
                             by {currentBook.author}
                           </p>
-                          <div className="flex flex-wrap items-center gap-x-[2cqi] gap-y-[0.6cqi] pt-[0.5cqi] origin-left scale-90 sm:scale-100">
+                          <div className="flex flex-wrap items-center gap-x-[2.4cqi] gap-y-[0.8cqi] pt-[0.6cqi]">
                             <RatingBadge
                               rating={currentBook.rating}
-                              size="sm"
+                              size="md"
+                              className="text-xs sm:text-sm lg:text-[2.8cqi] gap-1 sm:gap-1.5 font-bold"
                             />
                             <SpiceBadge
                               level={currentBook.spice_level}
-                              size="sm"
+                              size="md"
+                              className="text-xs sm:text-sm lg:text-[2.8cqi] gap-1 sm:gap-1.5 font-bold"
                             />
                           </div>
                         </div>
                       </div>
 
                       {/* Footer bar */}
-                      <div className="pt-[2cqi] border-t border-[#5B2302]/15 flex flex-row items-center justify-between gap-[2cqi] shrink-0">
-                        <span className="text-[2.3cqi] font-body font-bold text-[#5B2302] flex items-center gap-[1cqi] shrink-0 whitespace-nowrap">
+                      <div className="pt-[2cqi] border-t border-[#5B2302]/15 flex flex-row items-center justify-between gap-2 sm:gap-[2cqi] shrink-0">
+                        <span className="text-[clamp(11px,2.3cqi,13px)] font-body font-bold text-[#5B2302] flex items-center gap-1 sm:gap-[1cqi] shrink-0 whitespace-nowrap">
                           <Calendar
                             color="#5B2302"
                             variant="Bold"
-                            className="w-[2.6cqi] h-[2.6cqi] shrink-0"
+                            className="w-3.5 h-3.5 sm:w-[2.6cqi] sm:h-[2.6cqi] shrink-0"
                           />
                           Discussion:{" "}
                           {new Date(
@@ -285,12 +287,12 @@ export default function HomePage() {
                         <button
                           type="button"
                           onClick={() => setReadingGuideOpen(true)}
-                          className="clean-btn px-[3.2cqi] py-[1.4cqi] rounded-full bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-[2cqi] font-extrabold uppercase tracking-wider flex items-center justify-center gap-[1cqi] font-body cursor-pointer active:scale-95 shrink-0 whitespace-nowrap"
+                          className="clean-btn px-2.5 py-1.5 sm:px-[3.2cqi] sm:py-[1.4cqi] rounded-full bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-[clamp(11px,2cqi,12px)] font-extrabold uppercase tracking-wider flex items-center justify-center gap-1 sm:gap-[1cqi] font-body cursor-pointer active:scale-95 shrink-0 whitespace-nowrap"
                         >
                           <Book1
                             color="#FFA5D5"
                             variant="Bold"
-                            className="w-[2.4cqi] h-[2.4cqi] shrink-0"
+                            className="w-3.5 h-3.5 sm:w-[2.4cqi] sm:h-[2.4cqi] shrink-0"
                           />
                           Reading Guide
                         </button>
@@ -438,75 +440,75 @@ export default function HomePage() {
           role="dialog"
           aria-modal="true"
           onClick={() => setReadingGuideOpen(false)}
-          className="fixed inset-0 z-50 bg-[#3D1600]/70 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 bg-[#3D1600]/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-[#FFFDF9] rounded-3xl p-6 sm:p-10 max-w-3xl w-full max-h-[90vh] overflow-y-auto no-scrollbar [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border-2 border-[#5B2302] relative animate-in zoom-in-95 duration-200 space-y-6 font-body"
+            className="bg-[#FFFDF9] rounded-3xl p-4 sm:p-8 max-w-3xl w-full max-h-[92vh] overflow-y-auto no-scrollbar [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border-2 border-[#5B2302] relative animate-in zoom-in-95 duration-200 space-y-5 font-body"
           >
-            {/* Modal Header with Book Cover & Download PDF CTA */}
-            <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#5B2302]/15">
-              <div className="flex items-center gap-4 sm:gap-5 min-w-0">
-                <div className="shrink-0">
-                  <BookCover
-                    book={currentBook}
-                    size="sm"
-                    className="w-20 h-30 sm:w-24 sm:h-36"
-                    showBookmark={false}
-                    showBadge={false}
-                  />
-                </div>
-                <div className="space-y-1 min-w-0">
-                  <span className="px-3 py-0.5 rounded-full bg-[#FFA5D5] text-[#5B2302] text-[10px] sm:text-xs font-extrabold uppercase tracking-wide border border-[#5B2302]/20 inline-block">
-                    Curator’s Reading Guide
-                  </span>
-                  <h3 className="font-block text-2xl sm:text-3xl uppercase text-[#5B2302] leading-tight">
-                    {currentBook.title}
-                  </h3>
-                  <p className="font-script text-2xl text-[#5B2302] leading-normal py-0.5 pl-1 -ml-1 overflow-visible">
-                    by {currentBook.author}
-                  </p>
-                  <div className="flex flex-wrap items-center gap-2 pt-1">
-                    <RatingBadge rating={currentBook.rating} size="sm" />
-                    <SpiceBadge level={currentBook.spice_level} size="sm" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 shrink-0">
+            {/* Modal Header: Book Cover on Left, Editorial Details on Right, Close Button at Top-Right */}
+            <div className="relative flex items-start gap-3.5 sm:gap-5 pb-4 border-b border-[#5B2302]/15 pr-10 sm:pr-12">
+              {/* Top-Right Controls */}
+              <div className="absolute top-0 right-0 flex items-center gap-2">
                 <button
                   type="button"
                   onClick={handleDownloadGuidePdf}
                   disabled={isDownloadingGuide}
-                  className="clean-btn px-3.5 py-2 rounded-full bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-[10px] sm:text-xs font-extrabold uppercase tracking-wider inline-flex items-center gap-1.5 cursor-pointer disabled:opacity-60"
+                  className="hidden sm:inline-flex clean-btn px-3.5 py-2 rounded-full bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-xs font-extrabold uppercase tracking-wider items-center gap-1.5 cursor-pointer disabled:opacity-60 shadow-sm active:scale-95"
                 >
                   <DocumentDownload size={15} color="#FFA5D5" variant="Bold" />
-                  <span className="hidden sm:inline">
-                    {isDownloadingGuide ? "Preparing PDF..." : "Download PDF"}
-                  </span>
-                  <span className="sm:hidden">
-                    {isDownloadingGuide ? "..." : "PDF"}
+                  <span>
+                    {isDownloadingGuide ? "Preparing..." : "Download PDF"}
                   </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setReadingGuideOpen(false)}
-                  className="p-1.5 rounded-full border border-[#5B2302]/30 text-[#5B2302] hover:bg-[#5B2302] hover:text-[#F6EEE9] transition-colors"
+                  className="p-1.5 sm:p-2 rounded-full border border-[#5B2302]/25 text-[#5B2302] hover:bg-[#5B2302] hover:text-[#F6EEE9] transition-colors cursor-pointer"
                   title="Close"
+                  aria-label="Close"
                 >
                   <X className="w-5 h-5" strokeWidth={2.2} />
                 </button>
               </div>
+
+              {/* Cover */}
+              <div className="shrink-0 pt-0.5">
+                <BookCover
+                  book={currentBook}
+                  size="sm"
+                  className="w-[80px] h-[116px] sm:w-[96px] sm:h-[140px] shadow-md"
+                  showBookmark={false}
+                  showBadge={false}
+                />
+              </div>
+
+              {/* Book Details */}
+              <div className="space-y-1.5 min-w-0 flex-1">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#FFA5D5] text-[#5B2302] text-[11px] sm:text-xs font-extrabold uppercase tracking-wide border border-[#5B2302]/20 inline-block">
+                  Curator’s Reading Guide
+                </span>
+                <h3 className="font-block text-xl sm:text-2xl lg:text-3xl uppercase text-[#5B2302] leading-tight">
+                  {currentBook.title}
+                </h3>
+                <p className="font-script text-xl sm:text-2xl text-[#5B2302] leading-normal py-0.5 pl-1 -ml-1 overflow-visible">
+                  by {currentBook.author}
+                </p>
+                <div className="flex flex-wrap items-center gap-2 pt-0.5">
+                  <RatingBadge rating={currentBook.rating} size="md" />
+                  <SpiceBadge level={currentBook.spice_level} size="md" />
+                </div>
+              </div>
             </div>
 
             {/* 0. COMPLETE SYNOPSIS / ABOUT THE BOOK */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-[#F6EEE9]/80 space-y-2.5 border border-[#5B2302]/15">
-              <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wide text-[#5B2302]">
-                <Book1 size={16} color="#5B2302" variant="Bold" />
+            <div className="p-4 sm:p-6 rounded-2xl bg-[#F6EEE9]/80 space-y-2 border border-[#5B2302]/15">
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-wide text-[#5B2302]">
+                <Book1 size={18} color="#5B2302" variant="Bold" />
                 About The Book
               </div>
-              <p className="text-xs sm:text-sm text-[#5B2302]/90 leading-relaxed font-body">
+              <p className="text-sm sm:text-base text-[#5B2302]/90 leading-relaxed font-body">
                 {currentBook.description}
               </p>
             </div>
@@ -514,7 +516,7 @@ export default function HomePage() {
             {/* CURATOR'S NOTE */}
             {currentBook.curator_note && (
               <div className="p-4 sm:p-5 rounded-2xl bg-[#FFFCEB] border border-[#5B2302]/15 space-y-1.5 font-body">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#5B2302] block">
+                <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-[#5B2302] block">
                   Curator’s Editorial Take
                 </span>
                 <p className="text-sm sm:text-base text-[#5B2302] leading-relaxed font-normal">
@@ -525,9 +527,9 @@ export default function HomePage() {
 
             {/* 1. WEEKLY PACING GUIDE */}
             {currentBook.reading_guide && (
-              <div className="p-5 rounded-2xl bg-[#F6EEE9]/70 space-y-3">
-                <div className="flex items-center gap-2 text-xs font-extrabold uppercase text-[#5B2302]">
-                  <Clock size={16} color="#5B2302" variant="Bold" />
+              <div className="p-4 sm:p-5 rounded-2xl bg-[#F6EEE9]/70 space-y-3">
+                <div className="flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-wide text-[#5B2302]">
+                  <Clock size={18} color="#5B2302" variant="Bold" />
                   Weekly Pacing Guide
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
@@ -542,12 +544,12 @@ export default function HomePage() {
                       return (
                         <div
                           key={idx}
-                          className="p-3.5 rounded-xl bg-[#FFFDF9] border border-[#5B2302]/10"
+                          className="p-3.5 sm:p-4 rounded-xl bg-[#FFFDF9] border border-[#5B2302]/10 space-y-1"
                         >
-                          <span className="font-bold text-xs uppercase text-[#5B2302] block mb-0.5">
+                          <span className="font-extrabold text-xs sm:text-sm uppercase text-[#5B2302] block">
                             {title}
                           </span>
-                          <p className="text-xs text-[#5B2302]/85 leading-relaxed">
+                          <p className="text-sm text-[#5B2302]/90 leading-relaxed font-body">
                             {content}
                           </p>
                         </div>
@@ -559,12 +561,12 @@ export default function HomePage() {
 
             {/* 2. THEMES & CONTENT NOTES */}
             {currentBook.has_content_notes && (
-              <div className="p-5 rounded-2xl bg-[#F6EEE9]/70 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-extrabold uppercase text-[#5B2302]">
-                  <SecuritySafe size={16} color="#5B2302" variant="Bold" />
+              <div className="p-4 sm:p-5 rounded-2xl bg-[#F6EEE9]/70 space-y-2">
+                <div className="flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-wide text-[#5B2302]">
+                  <SecuritySafe size={18} color="#5B2302" variant="Bold" />
                   Themes & Content Notes
                 </div>
-                <p className="text-xs sm:text-sm text-[#5B2302]/85 leading-relaxed">
+                <p className="text-sm sm:text-base text-[#5B2302]/90 leading-relaxed font-body">
                   {currentBook.content_notes}
                 </p>
               </div>
@@ -572,43 +574,49 @@ export default function HomePage() {
 
             {/* 3. SCENE-SKIP GUIDE */}
             {currentBook.has_scene_skip && (
-              <div className="p-5 rounded-2xl bg-[#F6EEE9]/70 space-y-2">
+              <div className="p-4 sm:p-5 rounded-2xl bg-[#F6EEE9]/70 space-y-2">
                 <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <div className="flex items-center gap-2 text-xs font-extrabold uppercase text-[#5B2302]">
-                    <Star size={16} color="#FFA5D5" variant="Bold" />
+                  <div className="flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-wide text-[#5B2302]">
+                    <Star size={18} color="#FFA5D5" variant="Bold" />
                     Spicy Scenes Guide
                   </div>
-                  <span className="text-[11px] font-semibold text-[#5B2302]/75">
+                  <span className="text-xs font-semibold text-[#5B2302]/80">
                     * We genuinely recommend skipping.
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#5B2302]/85 leading-relaxed">
+                <p className="text-sm sm:text-base text-[#5B2302]/90 leading-relaxed font-body">
                   {currentBook.scene_skip_guide}
                 </p>
               </div>
             )}
 
-            {/* Bottom Download Button */}
-            <div className="pt-2 border-t border-[#5B2302]/15 flex items-center justify-between gap-3">
-              <span className="text-xs font-body font-bold text-[#5B2302] flex items-center gap-1.5">
-                <Calendar size={15} color="#5B2302" variant="Bold" />
-                Discussion:{" "}
-                {new Date(currentBook.discussion_date).toLocaleDateString(
-                  "en-GB",
-                  { day: "numeric", month: "short", year: "numeric" },
-                )}
-              </span>
+            {/* Bottom Bar: Discussion Date on Left, Download Button on Right */}
+            <div className="pt-3.5 border-t border-[#5B2302]/15 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <Calendar size={20} color="#5B2302" variant="Bold" className="shrink-0" />
+                <div className="flex flex-col min-w-0">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#5B2302]/65 leading-none">
+                    Discussion Date
+                  </span>
+                  <span className="text-xs sm:text-sm font-extrabold text-[#5B2302] whitespace-nowrap leading-tight mt-0.5">
+                    {new Date(currentBook.discussion_date).toLocaleDateString(
+                      "en-GB",
+                      { day: "numeric", month: "short", year: "numeric" },
+                    )}
+                  </span>
+                </div>
+              </div>
 
               <button
                 type="button"
                 onClick={handleDownloadGuidePdf}
                 disabled={isDownloadingGuide}
-                className="clean-btn px-5 py-2.5 rounded-full bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-xs font-extrabold uppercase tracking-wider inline-flex items-center gap-2 cursor-pointer disabled:opacity-60"
+                className="clean-btn px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#5B2302] text-[#F6EEE9] hover:bg-[#3D1600] text-xs sm:text-sm font-extrabold uppercase tracking-wider inline-flex items-center gap-2 cursor-pointer disabled:opacity-60 active:scale-95 shadow-sm shrink-0 whitespace-nowrap"
               >
-                <DocumentDownload size={16} color="#FFA5D5" variant="Bold" />
-                {isDownloadingGuide
-                  ? "Generating PDF..."
-                  : "Download Reading Guide PDF"}
+                <DocumentDownload size={16} color="#FFA5D5" variant="Bold" className="shrink-0" />
+                <span>
+                  {isDownloadingGuide ? "Preparing..." : "Download PDF"}
+                </span>
               </button>
             </div>
           </div>

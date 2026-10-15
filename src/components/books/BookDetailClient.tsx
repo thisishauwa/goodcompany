@@ -165,7 +165,7 @@ export function BookDetailClient({ bookId }: { bookId: string }) {
           {/* ========================================================================= */}
           <div className="space-y-6">
             <div className="border-b border-[#5B2302]/15 pb-3">
-              <span className="text-xs font-extrabold uppercase tracking-wider text-[#5B2302] block font-body">
+              <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-[#5B2302] block font-body">
                 Curator Dossier
               </span>
               <h2 className="font-block text-2xl sm:text-3xl uppercase text-[#5B2302]">
@@ -174,7 +174,7 @@ export function BookDetailClient({ bookId }: { bookId: string }) {
             </div>
 
             {/* 1. WEEKLY PACING GUIDE */}
-            <div className="paper-card rounded-2xl p-6 sm:p-8 border-2 border-[#5B2302] space-y-4">
+            <div className="paper-card rounded-2xl p-4 sm:p-8 border-2 border-[#5B2302] space-y-4">
               <div
                 onClick={() => setPacingExpanded(!pacingExpanded)}
                 className="flex items-center justify-between cursor-pointer select-none"
@@ -194,47 +194,47 @@ export function BookDetailClient({ bookId }: { bookId: string }) {
 
               {pacingExpanded && (
                 <div className="pt-3 border-t border-[#5B2302]/10 font-body space-y-4">
-                  <p className="text-xs sm:text-sm text-[#5B2302]/80 leading-relaxed">
+                  <p className="text-sm sm:text-base text-[#5B2302]/90 leading-relaxed">
                     Follow along at our suggested cadence to stay in sync with
                     the WhatsApp group discussions without risking spoilers.
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="p-4 rounded-xl bg-[#FFFCEB] border border-[#5B2302]/20 space-y-1">
-                      <span className="font-bold text-xs uppercase text-[#5B2302] block">
+                      <span className="font-extrabold text-xs sm:text-sm uppercase text-[#5B2302] block">
                         Week 1 · Chapters 1–7
                       </span>
-                      <p className="text-xs text-[#5B2302]/85 leading-relaxed">
+                      <p className="text-sm text-[#5B2302]/90 leading-relaxed font-body">
                         Setting the premise, establishing central relationships,
                         and introducing the core conflict.
                       </p>
                     </div>
 
                     <div className="p-4 rounded-xl bg-[#FFFCEB] border border-[#5B2302]/20 space-y-1">
-                      <span className="font-bold text-xs uppercase text-[#5B2302] block">
+                      <span className="font-extrabold text-xs sm:text-sm uppercase text-[#5B2302] block">
                         Week 2 · Chapters 8–15
                       </span>
-                      <p className="text-xs text-[#5B2302]/85 leading-relaxed">
+                      <p className="text-sm text-[#5B2302]/90 leading-relaxed font-body">
                         The turning point: shifting alliances, rising tensions,
                         and unsaid confessions.
                       </p>
                     </div>
 
                     <div className="p-4 rounded-xl bg-[#FFFCEB] border border-[#5B2302]/20 space-y-1">
-                      <span className="font-bold text-xs uppercase text-[#5B2302] block">
+                      <span className="font-extrabold text-xs sm:text-sm uppercase text-[#5B2302] block">
                         Week 3 · Chapters 16–22
                       </span>
-                      <p className="text-xs text-[#5B2302]/85 leading-relaxed">
+                      <p className="text-sm text-[#5B2302]/90 leading-relaxed font-body">
                         The climax builds: moral questions come to a head and
                         secrets are laid bare.
                       </p>
                     </div>
 
                     <div className="p-4 rounded-xl bg-[#FFFCEB] border border-[#5B2302]/20 space-y-1">
-                      <span className="font-bold text-xs uppercase text-[#5B2302] block">
+                      <span className="font-extrabold text-xs sm:text-sm uppercase text-[#5B2302] block">
                         Week 4 · Chapters 23–Finale
                       </span>
-                      <p className="text-xs text-[#5B2302]/85 leading-relaxed">
+                      <p className="text-sm text-[#5B2302]/90 leading-relaxed font-body">
                         Resolution, final revelations, and getting ready for the
                         final salon discussion.
                       </p>
@@ -242,7 +242,7 @@ export function BookDetailClient({ bookId }: { bookId: string }) {
                   </div>
 
                   {book.reading_guide && (
-                    <div className="p-4 rounded-xl bg-[#F6EEE9] border border-[#5B2302]/15 mt-3 text-xs sm:text-sm text-[#5B2302]/90 leading-relaxed whitespace-pre-line">
+                    <div className="p-4 rounded-xl bg-[#F6EEE9] border border-[#5B2302]/15 mt-3 text-sm sm:text-base text-[#5B2302]/90 leading-relaxed whitespace-pre-line font-body">
                       {book.reading_guide}
                     </div>
                   )}
@@ -252,7 +252,7 @@ export function BookDetailClient({ bookId }: { bookId: string }) {
 
             {/* 2. THEMES & CONTENT NOTES */}
             {book.has_content_notes && (
-              <div className="paper-card rounded-2xl p-6 sm:p-8 border-2 border-[#5B2302] space-y-4">
+              <div className="paper-card rounded-2xl p-4 sm:p-8 border-2 border-[#5B2302] space-y-4">
                 <div
                   onClick={() => setContentNotesExpanded(!contentNotesExpanded)}
                   className="flex items-center justify-between cursor-pointer select-none"
@@ -272,7 +272,7 @@ export function BookDetailClient({ bookId }: { bookId: string }) {
 
                 {contentNotesExpanded && (
                   <div className="pt-3 border-t border-[#5B2302]/10 font-body space-y-2">
-                    <p className="text-xs sm:text-sm text-[#5B2302]/85 leading-relaxed">
+                    <p className="text-sm sm:text-base text-[#5B2302]/90 leading-relaxed">
                       {book.content_notes}
                     </p>
                   </div>
@@ -282,7 +282,7 @@ export function BookDetailClient({ bookId }: { bookId: string }) {
 
             {/* 3. SCENE-SKIP GUIDE */}
             {book.has_scene_skip && (
-              <div className="paper-card rounded-2xl p-6 sm:p-8 border-2 border-[#5B2302] space-y-4">
+              <div className="paper-card rounded-2xl p-4 sm:p-8 border-2 border-[#5B2302] space-y-4">
                 <div
                   onClick={() => setSkipGuideExpanded(!skipGuideExpanded)}
                   className="flex items-center justify-between cursor-pointer select-none"
@@ -302,10 +302,10 @@ export function BookDetailClient({ bookId }: { bookId: string }) {
 
                 {skipGuideExpanded && (
                   <div className="pt-3 border-t border-[#5B2302]/10 font-body space-y-2">
-                    <p className="text-xs font-semibold text-[#5B2302]/75">
+                    <p className="text-xs sm:text-sm font-semibold text-[#5B2302]/80">
                       * We genuinely recommend skipping.
                     </p>
-                    <p className="text-xs sm:text-sm text-[#5B2302]/85 leading-relaxed">
+                    <p className="text-sm sm:text-base text-[#5B2302]/90 leading-relaxed">
                       {book.scene_skip_guide}
                     </p>
                   </div>
