@@ -59,6 +59,15 @@ export const metadata: Metadata = {
     title: "Good Company — Good Books. Better Conversations.",
     description: "A warm, thoughtful book club for passionate readers.",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180" },
+    ],
+  },
 };
 
 export default function RootLayout({
